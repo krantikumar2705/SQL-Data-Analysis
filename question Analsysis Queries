@@ -1,0 +1,135 @@
+USE classicmodels;
+SELECT * FROM employees;
+SELECT * FROM payments;
+SELECT * FROM productlines;
+SELECT * FROM products;
+SELECT * FROM orderdetails;
+SELECT * FROM orders;
+SELECT * FROM  customers;
+-- ------------------------------------------Retrieval Questions:
+
+-- What are the names of all employees in the "Sales" job title?
+SELECT * FROM employees
+WHERE jobTitle rlike "Sales";
+
+-- What is the average salary of all employees?
+SELECT concat(e.firstName, " " ,e.lastName) as Name , avg(p.amount) FROM employees as e
+inner join customers as c on c.salesRepEmployeeNumber = e.employeeNumber
+inner join payments as p on p.customerNumber = c.customerNumber
+group by e.firstName,e.lastName
+order by avg(p.amount) desc;
+
+-- What is the average salary of employees in each job title?
+SELECT e.jobTitle, AVG(p.amount) AS average_payment
+FROM employees AS e, payments as p
+group by e.jobtitle
+order by avg(amount);
+
+-- What are the total sales for each product line?
+SELECT SUM(o.priceEach) , p.productLine from orderdetails as o , products as p
+group by p.productLine
+order by SUM(o.priceEach) desc;
+
+-- Which customers have placed orders in the past month?
+
+-- What is the payment status of order number ?
+SELECT  * FROM orders
+WHERE orderNumber = "10143";
+
+
+-- --------------------- Analytical Questions:
+
+-- Which products are most frequently ordered together?
+SELECT distinct concat(p1.productName,' | ',p2.productName), 
+					o.productCode,od.productCode , count(*) 
+from orderdetails as o
+inner join orderdetails as od on od.orderNumber =o.orderNumber and od.productCode < o.productCode
+JOIN products AS p1 ON o.productCode = p1.productCode
+JOIN products AS p2 ON od.productCode = p2.productCode
+group by o.productCode,od.productCode;
+
+
+-- Which customers have the highest lifetime value?
+SELECT c.customerNumber, c.customerName, SUM(od.priceEach) AS highest_lifetime_value
+FROM customers AS c
+JOIN orders AS o ON c.customerNumber = o.customerNumber
+join orderdetails as od on od.orderNumber = o.orderNumber
+GROUP BY c.customerNumber, c.customerName
+ORDER BY highest_lifetime_value DESC;
+
+-- What is the average time it takes to ship an order?
+SELECT AVG(TIMESTAMPDIFF(DAY, orderdate, shippeddate)) AS average_shipping_time_days
+FROM Orders
+where shippedDate is not null;
+
+-- What are the best-selling products in each product line?
+SELECT p.productName,p.productCode,count(o.quantityOrdered),p.productLine FROM orderdetails AS o
+join products as p on p.productCode = o.productCode
+group by p.productCode,p.productLine,p.productName
+order by count(o.quantityOrdered) desc;
+
+-- Which employees have generated the most sales volume?
+SELECT c.salesRepEmployeeNumber,concat(e.firstName , " ",e.lastName),e.email , sum(quantityOrdered *priceEach) 
+from employees as e
+join customers as c on c.salesRepEmployeeNumber= e.employeeNumber
+join orders as o on o.customerNumber = c.customerNumber
+join orderdetails as od on od.orderNumber = o.orderNumber
+group by concat(e.firstName , " ",e.lastName), c.salesRepEmployeeNumber
+order by sum(quantityOrdered *priceEach)  desc;
+
+-- ------------------------------questions  queries
+-- Over the three years where data was collected, what was the total revenue each year?
+SELECT YEAR(paymentDate) , sum(amount) from payments
+group by YEAR(paymentDate) 
+order by sum(amount) desc;
+
+-- Who are the highest spending customers?
+select c.customerName ,
+		c.customerName,
+        c.contactLastName,
+        c.city, c.state, sum(od.quantityOrdered * od.priceEach ) total_spending,
+        max(o.orderDate) as lastOrder
+from customers as c
+join orders as o on o.customerNumber = c.customerNumber
+join orderdetails as od on od.orderNumber = o.orderNumber
+group by c.customerName ,
+		c.customerName,
+        c.contactLastName,
+        c.city, c.state
+order by total_spending desc
+limit 10;
+
+-- Which month has the most total items ordered?
+SELECT month(o.orderDate) as Month,count(*) as orders
+	from orders as o
+group by month(o.orderDate) 
+order by orders desc;
+ 
+ -- Over the three years where data was collected, how many orders were there per year?
+ select year(orderDate),count(*) as orders_per_year
+ from orders
+ group by year(orderDate)
+ order by orders_per_year desc;
+ 
+ -- Over the three years where data was collected, what was the total revenue each year?
+ select year(paymentDate) as Year, sum(amount) as Total_revenue  from payments
+ group by year(paymentDate) 
+ order by sum(amount) desc;
+ 
+ -- Which product line has the highest quantity in stock?
+ SELECT productLine , sum(quantityInStock) as quantity_sum from products
+ group by productLine 
+ order by count(quantityInStock) desc;
+ 
+ -- What are the top three selling products in each product line?
+SELECT
+    p.productLine,
+    od.productCode,
+    MAX(p.productName) AS maxProductName,
+    MAX(priceEach) AS maxPriceEach,
+    RANK() OVER (PARTITION BY p.productLine ORDER BY SUM(od.quantityOrdered) DESC) AS totalQtySold_rank
+FROM orderdetails AS od
+JOIN products AS p ON od.productCode = p.productCode
+GROUP BY p.productLine, od.productCode
+ORDER By totalQtySold_rank, productLine
+limit 21;
