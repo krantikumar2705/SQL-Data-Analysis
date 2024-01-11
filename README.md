@@ -1,3 +1,5 @@
 # classicmodels
 
-![Uploading Untitled.png…]()
+DOWNLOAD THE classicmdodels DATABASE
+👇
+https://www.mysqltutorial.org/getting-started-with-mysql/mysql-sample-database/
