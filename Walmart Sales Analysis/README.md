@@ -95,3 +95,44 @@ This analysis aims to uncover the different customer segments, purchase trends, 
 - Which time of the day do customers give most ratings per branch?
 - Which day of the week has the best average ratings?
 - Which day of the week has the best average ratings per branch?
+
+## Revenue And Profit Calculations
+
+### Formulas
+- \( \text{COGS} = \text{unitPrice} \times \text{quantity} \)
+- \( \text{VAT} = 5\% \times \text{COGS} \)
+- \( \text{total(gross\_sales)} = \text{VAT} + \text{COGS} \)
+- \( \text{grossProfit(grossIncome)} = \text{total(gross\_sales)} - \text{COGS} \)
+- \( \text{Gross Margin} = \frac{\text{gross income}}{\text{total revenue}} \)
+
+### Example Calculation
+#### Data given:
+- **Unit Price** = 45.79
+- **Quantity** = 7
+
+#### Step-by-Step Calculation:
+1. **COGS**: 
+   \[
+   \text{COGS} = 45.79 \times 7 = 320.53
+   \]
+
+2. **VAT**: 
+   \[
+   \text{VAT} = 5\% \times \text{COGS} = 0.05 \times 320.53 = 16.0265
+   \]
+
+3. **Total (Gross Sales)**: 
+   \[
+   \text{Total} = \text{VAT} + \text{COGS} = 16.0265 + 320.53 = 336.5565
+   \]
+
+4. **Gross Profit**: 
+   \[
+   \text{Gross Profit} = \text{Total} - \text{COGS} = 336.5565 - 320.53 = 16.0265
+   \]
+
+5. **Gross Margin Percentage**: 
+   \[
+   \text{Gross Margin Percentage} = \frac{\text{Gross Profit}}{\text{Total Revenue}} = \frac{16.0265}{336.5565} \approx 0.0476 \approx 4.76\%
+   \]
+
