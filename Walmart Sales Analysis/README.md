@@ -17,21 +17,21 @@ The major aim of thie project is to gain insight into the sales data of Walmart 
 The dataset was obtained from the https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting. This dataset contains sales transactions from a three different branches of Walmart, respectively located in Mandalay, Yangon and Naypyitaw. The data contains 17 columns and 1000 rows
 
 **Column                       Description
-invoice_id	              Invoice of the sales made
-branch	                  Branch at which sales were made
-city	                    The location of the branch	
-customer_type	            The type of the customer	
-gender	                  Gender of the customer making purchase
-product_line	            Product line of the product solf	
-unit_price	              The price of each product	
-quantity	                The amount of the product sold
-VAT	                      The amount of tax on the purchase
-total                    	The total cost of the purchase	
-date	                    The date on which the purchase was made
-time	                    The time at which the purchase was made	
-payment_method	          The total amount paid
-cogs	                    Cost Of Goods sold
-gross_margin_percentage	  Gross margin percentage	
-gross_income	            Gross Income	
-rating	                  Rating
+# invoice_id	              Invoice of the sales made
+# branch	                  Branch at which sales were made
+# city	                    The location of the branch	
+# customer_type	            The type of the customer	
+# gender	                  Gender of the customer making purchase
+# product_line	            Product line of the product solf	
+# unit_price	              The price of each product	
+# quantity	                The amount of the product sold
+# VAT	                      The amount of tax on the purchase
+# total                    	The total cost of the purchase	
+# date	                    The date on which the purchase was made
+# time	                    The time at which the purchase was made	
+# payment_method	          The total amount paid
+# cogs	                    Cost Of Goods sold
+# gross_margin_percentage	  Gross margin percentage	
+# gross_income	            Gross Income	
+# rating	                  Rating
 **
