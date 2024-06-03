@@ -3,6 +3,7 @@ This repository contains code and data related to the analysis of a movie rental
 
 ## Introduction
 The movie rental database used for this analysis contains information about movie rentals, including details about customers, movies, rentals, and more. SQL queries are employed to extract meaningful information from this dataset.
+https://medium.com/@krantikumarrm2705/filmrental-analysis-sql-7ad6a543db97 in medium
 
 ## Key Questions Explored
 -- 1. What is the total revenue generated from all rentals in the database? 
