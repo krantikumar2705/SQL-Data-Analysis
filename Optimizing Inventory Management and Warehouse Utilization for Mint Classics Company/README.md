@@ -1,6 +1,9 @@
 # Optimizing Inventory Management and Warehouse Utilization for Mint Classics Company
 
 ## Overview
+In this project,I perform exploratory data analysis for Mint Classics Company, a retailer of model cars. The company is looking to close one of its storage facilities. Your objective is to recommend inventory reduction strategies that won’t negatively impact customer service.
+
+Using MySQL Workbench, you’ll familiarize yourself with the sample database, run SQL queries to identify factors affecting storage space and propose inventory reduction approaches. Upon completion, you’ll demonstrate your ability to perform exploratory data analysis and present the results in a format that supports your recommendations.
 
 This project aims to optimize inventory management and warehouse utilization for Mint Classics Company. The primary focus is on evaluating the viability of closing one of their storage facilities while maintaining timely service to customers. By leveraging SQL queries and data analysis techniques, the project provides data-driven recommendations to enhance operational efficiency and reduce costs.
 
